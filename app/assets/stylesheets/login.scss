@@ -1,0 +1,42 @@
+// Place all the styles related to the Login controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    font-size: 3rem;
+    font-weight: 600;
+    background: #eee;
+    border: 1px solid black;
+}
+.login-wrapper {
+    height: calc(60vh - 80px);
+    margin: auto;
+}
+#form-login .form-group {
+    margin-bottom: 45px;
+}
+#form-login .form-group input {
+    height: 45px;
+}
+.btn-login-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn-login-form .btn {
+    display: flex;
+    width: 120px;
+    height: 45px;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+.notice {
+    color: red;
+    width: 40%;
+    text-align: center;
+    margin: 2rem auto;
+}
