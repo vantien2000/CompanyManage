@@ -11,10 +11,6 @@
 </head>
 <body>
 <%= yield :login %>
- <%
-=begin%>
- <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'%>    
-<%
-=end%>
+<%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'%>    
 </body>
 </html>
