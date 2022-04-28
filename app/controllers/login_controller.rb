@@ -1,12 +1,12 @@
 class LoginController < ApplicationController
   layout "login"
   def index
-    if login_in?
-      redirect_to "/"
-    end
+
   end
 
   def postLogin
+    session[:old_email] = params[:email]
+    session[:old_password] = params[:params]
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.user_id
@@ -18,10 +18,10 @@ class LoginController < ApplicationController
   end
 
   def rolesLogin user_id
-    user_role = UserRole.select('role_id').where('user_id', session[:user_id]).all()
-    case user_role[0]
+    user_role = UserRole.select('role_id').where('user_id', session[:user_id]).first()
+    case user_role['role_id']
     when 1
-      redirect_to "/"
+      redirect_to "/companies"
     when 2
       render html: "AAA"
     end

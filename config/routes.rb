@@ -1,8 +1,8 @@
 
 Rails.application.routes.draw do
+  resources :companies
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get '/' , to: 'home#index';
   get 'login' , to: 'login#index';
-  get 'logout', to: 'login#destroy';
-  post 'login' , to: 'login#postLogin';
+  delete 'logout', to: 'login#destroy', as: 'logout';
+  post 'postLogin' , to: 'login#postLogin';
 end

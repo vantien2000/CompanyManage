@@ -4,7 +4,6 @@ $(document).ready(function() {
 		  "email": {
 			required: true,
 			maxlength: 256,
-			email: true,
 			vaidateEmail: true,
 		  },
 		  "password": {

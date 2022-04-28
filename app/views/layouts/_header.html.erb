@@ -14,10 +14,7 @@
         <img class="avatar" src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg" alt="" width="50px" height="50px"/>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <%= link_to "logout", logout_path, class: "dropdown-item", method: :delete %>
       </div>
     </li>
   </ul>

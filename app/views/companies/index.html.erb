@@ -1,0 +1,137 @@
+<% content_for :content do %>
+<div class="wrapper">
+  <div class="main-wrapper row">
+    <div class="col-lg-12 col-sm-12 title-main">
+      <h4 class="m-0">Company Management</h4>
+    </div>
+    <%= form_with(url: "/companies", method: "get" ,class: "col-lg-12 col-sm-12", id: "company-management-frm") do |form| %>
+      <table id="table-company-frm" class="table col-lg-5 col-sm-5 mt-4">
+        <tr>
+          <td><label>Company</label><td>
+          <td>
+            <div class="row form-group">
+              <div class="col-sm-4">
+                <input type="code" id="code" name="code" class="form-control" aria-describedby="emailHelp" placeholder="Company code">
+              </div>
+              <div class="col-sm-8">
+                <input type="text" name="company_name" id="company_name" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Company name">
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="email">Email</label><td>
+          <td>
+            <div class="row form-group">
+              <div class="col-sm-8">
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Please enter Email">
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="phone_number">Phone number</label><td>
+          <td>
+            <div class="row form-group">
+              <div class="col-sm-8">
+                <input type="text" id="phone_number" name="phone_number" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Phone number">
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="exampleInputEmail1">Status</label><td>
+          <td>
+            <div class="row form-group">
+              <div class="col-sm-8">
+                <select name="status" id="status" class="form-control">
+                  <option value="" >Status</option>
+                  <option value="0">Stopped</option>
+                  <option value="1">Working</option>
+                  <option value="2">Pending</option>
+                </select>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <div class="col-lg-12 col-sm-12 d-flex justify-content-end align-items-center my-4">
+        <ul class="nav group-btn">
+          <li class="nav-item">
+            <%= link_to "Register", { controller: 'companies' , action: 'new' }, class: "btn btn-success" %>
+          </li>
+          <li class="nav-item">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-dark" href>Back</a>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+    <div class="col-lg-12 col-sm-12">
+      <div class="table-company">
+        <table id="table-company-content" class="table">
+          <thead>
+            <tr>
+              <th width="15%" class="col-content" scope="col">Code</th>
+              <th width="20%" class="col-content" scope="col">Company name</th>
+              <th width="20%" class="col-content" scope="col">Email</th>
+              <th width="15%" class="col-content" scope="col">Phone number</th>
+              <th width="15%" class="col-content" scope="col">Status</th>
+              <th width="15%" class="col-content" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @companies.each do |company| %>
+              <tr>
+                <td class="col-content"><%= company.code %></th>
+                <td class="col-content"><%= company.company_name %></td>
+                <td class="col-content"><%= company.email %></td>
+                <td class="col-content"><%= company.phone_number %></td>
+                <% if company.status == 0 %>
+                  <td class="col-content"><span class="btn btn-dark btn-status-stop">Stopped</span></td>
+                <% elsif company.status == 1 %>
+                  <td class="col-content"><span class="btn btn-dark btn-status-working">Working</span></td>
+                <% else %>
+                  <td class="col-content"><span class="btn btn-dark btn-status-pending">Pending</span></td>
+                <% end %>
+                <td class="col-content">
+                  <%= link_to 'Detail', company, class: "btn btn-dark btn-detail" %>
+                  <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-dark btn-remove"%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="paginator d-flex align-items-center justify-content-between">
+        <%= form_with(url: "/companies", method: "get", class: "d-flex align-items-center", id: "form_per_page") do |form| %>
+          <label class="d-block" for="per_page">Row per page</label>
+          <select id="per_page" name="per_page" class="form-control d-block">
+            <% index = 5 %>
+            <option hidden value="<%= index %>"><%= index %></option>
+            <% until index >= @companies.count %>
+              <option <%= index == @per_page.to_i ? "selected" : "" %> value="<%= index %>"><%= index %></option>
+              <% index = index + 5 %>
+            <% end %>
+            <% if index > @companies.count %>
+              <option <%= index == @per_page.to_i ? "selected" : "" %> value="<%= index %>"><%= index %></option>
+            <% end %>
+          </select>
+        <% end %>
+        <div class="total-page d-flex align-items-center justify-content-between">
+          <% current_page = @companies.current_page %>
+          <% total = @companies.count %>
+          <% per_page_right = @per_page.to_i >= total ? total : @per_page.to_i %>
+          <% first_page = (current_page - 1)*per_page_right + 1 %>
+          <% last_page = current_page <= total/per_page_right ? per_page_right*current_page : total %>
+          <span class="mr-3"><%= first_page%>-<%= last_page%> of <%= total %></span>
+          <%= will_paginate @companies, :previous_label => 'Previous', :next_label => 'Next'%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

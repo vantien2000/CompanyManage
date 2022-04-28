@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    include LoginHelper
+    layout "application"
     helper_method :current_user
     helper_method :login_in?
     def current_user

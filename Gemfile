@@ -25,6 +25,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'mysql2', '~> 0.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'will_paginate', '~> 3.3'
+gem 'will_paginate-bootstrap4'
 gem 'bcrypt-ruby'
 
 gem 'rails_param'

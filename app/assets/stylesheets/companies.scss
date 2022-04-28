@@ -1,3 +1,6 @@
+// Place all the styles related to the Companies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
@@ -50,22 +53,34 @@ header .dropdown-menu {
     align-items: center;
     border-radius: 6px;
 }
-#company-management-frm hr {
-    border-bottom: 1px solid black;
+#company-management-frm, 
+#company-register-frm {
+    hr {
+        border-bottom: 1px solid black;
+    }
 }
-#company-management-frm #table-company-frm td label {
-    font-size: 1rem;
-    margin-bottom: 1rem;
+#company-management-frm,
+#company-register-frm {
+    #table-company-frm td label {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
 }
-#company-management-frm #table-company-frm td {
-    vertical-align: middle;
-    border-top: none !important;
+#company-management-frm,
+#company-register-frm {
+    #table-company-frm td {
+        vertical-align: middle;
+        border-top: none !important;
+    }
 }
 
-#company-management-frm #table-company-frm td input {
-    border: 2px solid #72ACFF;
-    height: 45px;
-    border-radius: 10px !important;
+#company-management-frm,
+#company-register-frm {
+    #table-company-frm td .form-control {
+        border: 2px solid #72ACFF;
+        height: 45px;
+        border-radius: 10px !important;
+    }
 }
 
 .group-btn a, button {
@@ -75,7 +90,6 @@ header .dropdown-menu {
     margin-left: 10px;
 }
 .table-company {
-    height: 400px;
     width: 98%;
     margin: auto;
     margin-bottom: 1.5rem;
@@ -84,6 +98,7 @@ header .dropdown-menu {
     border: 0.5px solid #C8C8C8;
     border-radius: 6px;
     opacity: 1;
+    height: 450px;
 }
 #table-company-content th {
     background-color: #72ACFF;
@@ -93,6 +108,7 @@ header .dropdown-menu {
     box-shadow: 0px 3px 90px #00000029;
     border: 0.5px solid #C8C8C8;
     opacity: 1;
+    vertical-align: middle;
 }
 #table-company-content .col-content .btn {
     width: 100px;
@@ -116,4 +132,52 @@ header .dropdown-menu {
 #table-company-content .col-content .btn-remove {
     background: #D31212 0% 0% no-repeat padding-box;
     border: 1px solid #D31212;
+}
+.form-wrapper {
+    padding: 0px 2.5rem !important;
+    margin: auto;
+    border-bottom: 1px solid #000;
+}
+.upload-logo {
+    tr {
+        vertical-align: top;
+        td {
+            width: 325px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-left: 5rem;
+            label {
+                font-size: 1.1rem;
+            }
+        }
+    }
+    .logo-img {
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+    }
+    .btn-upload {
+        label {
+            cursor: pointer;
+            position: relative;
+            background-color: #0058FF;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 5px;
+            i {
+                color: #000;
+                margin-right: 5px;
+                padding: 0px;
+            }
+        }
+        input {
+            display: none;
+            position: absolute;
+        }
+    }
 }
