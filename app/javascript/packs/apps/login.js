@@ -11,7 +11,6 @@ $(document).ready(function() {
 			maxlength: 256
 		  },
 		},
-	
 		messages: {
 		  "password": {
 			required: "Password is require",
@@ -23,7 +22,6 @@ $(document).ready(function() {
 			validateEmail: "Please enter a valid email address"
 		  }
 		},
-	
 		submitHandler: function(form) {
 		  form.submit();
 		}

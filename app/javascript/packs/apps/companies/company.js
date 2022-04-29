@@ -1,3 +1,3 @@
 import "./management"
 import "./register";
-import "./validate"
+import "./validate";

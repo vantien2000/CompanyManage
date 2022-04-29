@@ -1,3 +1,7 @@
+<% content_for :title, "Company management" %>
+<%= content_for :head do %>
+  <%= javascript_pack_tag 'apps/companies/company', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
 <% content_for :content do %>
 <div class="wrapper">
   <div class="main-wrapper row">
@@ -11,10 +15,10 @@
           <td>
             <div class="row form-group">
               <div class="col-sm-4">
-                <input type="code" id="code" name="code" class="form-control" aria-describedby="emailHelp" placeholder="Company code">
+                <input type="code" id="code" name="code" class="form-control" aria-describedby="emailHelp" placeholder="Company code" value=<%= @params["code"] %>>
               </div>
               <div class="col-sm-8">
-                <input type="text" name="company_name" id="company_name" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Company name">
+                <input type="text" name="company_name" id="company_name" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Company name" value=<%= @params["company_name"] %>>
               </div>
             </div>
           </td>
@@ -24,7 +28,7 @@
           <td>
             <div class="row form-group">
               <div class="col-sm-8">
-                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Please enter Email">
+                <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Please enter Email" value=<%= @params["email"] %>>
               </div>
             </div>
           </td>
@@ -34,7 +38,7 @@
           <td>
             <div class="row form-group">
               <div class="col-sm-8">
-                <input type="text" id="phone_number" name="phone_number" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Phone number">
+                <input type="text" id="phone_number" name="phone_number" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Phone number" value=<%= @params["phone_number"] %>>
               </div>
             </div>
           </td>
@@ -44,12 +48,7 @@
           <td>
             <div class="row form-group">
               <div class="col-sm-8">
-                <select name="status" id="status" class="form-control">
-                  <option value="" >Status</option>
-                  <option value="0">Stopped</option>
-                  <option value="1">Working</option>
-                  <option value="2">Pending</option>
-                </select>
+                <%= form.select :status, [["Status", ""],["Stopped", "0"],["Working", "1"],["Pending", "2"]], {selected: @params["status"]}, {class: "form-control"} %>
               </div>
             </div>
           </td>
@@ -70,6 +69,7 @@
         </ul>
       </div>
     <% end %>
+    <% if @companies.count > 0 %>
     <div class="col-lg-12 col-sm-12">
       <div class="table-company">
         <table id="table-company-content" class="table">
@@ -109,17 +109,12 @@
       <div class="paginator d-flex align-items-center justify-content-between">
         <%= form_with(url: "/companies", method: "get", class: "d-flex align-items-center", id: "form_per_page") do |form| %>
           <label class="d-block" for="per_page">Row per page</label>
-          <select id="per_page" name="per_page" class="form-control d-block">
-            <% index = 5 %>
-            <option hidden value="<%= index %>"><%= index %></option>
-            <% until index >= @companies.count %>
-              <option <%= index == @per_page.to_i ? "selected" : "" %> value="<%= index %>"><%= index %></option>
-              <% index = index + 5 %>
-            <% end %>
-            <% if index > @companies.count %>
-              <option <%= index == @per_page.to_i ? "selected" : "" %> value="<%= index %>"><%= index %></option>
-            <% end %>
-          </select>
+          <%= form.select :per_page , [[5,5], [10,10], [20,20], [50, 50]], { selected: @per_page  }, {class: "form-control d-block"} %>
+          <%= form.hidden_field :code, value: @params[:code] %>
+          <%= form.hidden_field :company_name, value: @params[:company_name] %>
+          <%= form.hidden_field :email, value: @params[:email] %>
+          <%= form.hidden_field :phone_number, value: @params[:phone_number] %>
+          <%= form.hidden_field :status, value: @params[:status] %>
         <% end %>
         <div class="total-page d-flex align-items-center justify-content-between">
           <% current_page = @companies.current_page %>
@@ -132,6 +127,9 @@
         </div>
       </div>
     </div>
+    <% else %>
+      <h3 class="text-danger text-center w-100">Không có bản ghi</h3>
+    <% end %>
   </div>
 </div>
 <% end %>

@@ -1,10 +1,14 @@
+<% content_for :title, "Company register" %>
+<%= content_for :head do %>
+
+<% end %>
 <% content_for :content do %>
 <div class="wrapper">
   <div class="main-wrapper row">
     <div class="col-lg-12 col-sm-12 title-main">
       <h4 class="m-0">Company Management</h4>
     </div>
-    <form class="col-lg-12 col-sm-12 p-0" id="company-register-frm" method="POST">
+    <%= form_for @company, html: {class: "col-lg-12 col-sm-12 p-0", id: "company-register-frm"} do |f| %>
         <div class="form-wrapper mt-4 p-0 mr-0 d-flex">
             <table id="table-company-frm" class="table col-lg-6 col-sm-6">
                 <tr>
@@ -12,7 +16,7 @@
                     <td width="80%">
                         <div class="row form-group">
                             <div class="col-sm-4">
-                                <input type="text" id="code" name="code" class="form-control" aria-describedby="emailHelp" placeholder="Company code">
+                                <input type="text" id="code" name="code" class="form-control" aria-describedby="emailHelp" placeholder="Company code" , value="<% params[:code] %>">
                             </div>
                         </div>
                     </td>
@@ -22,7 +26,7 @@
                     <td>
                         <div class="row form-group">
                             <div class="col-sm-8">
-                                <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Please enter Company name">
+                                <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Please enter Company name" value="<% params[:company_name] %>">
                             </div>
                         </div>
                     </td>
@@ -81,8 +85,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" class="d-block" id="logo_image" name="upload" value="">
-                        <label id="error_image" generate="true" class="d-block error"></label>
+                        <input type="hidden" class="d-block" id="logo_image" name="logo_image">
+                        <label id="error_image" class="d-block error"></label>
                     </td>
                 </tr>
             </table>
@@ -97,7 +101,7 @@
                 </li>
             </ul>
         </div>
-    </form>
+    <% end %>
   </div>
 </div>
 <% end %>

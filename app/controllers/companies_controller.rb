@@ -6,6 +6,7 @@ class CompaniesController < ApplicationController
     per_page = params[:per_page] ? params[:per_page] : 5
     @companies = filter_company company_params_filter, per_page
     @per_page = per_page
+    @params = params[:per_page] ? params : company_params_filter
   end
 
   # GET /companies/1 or /companies/1.json
@@ -77,22 +78,21 @@ class CompaniesController < ApplicationController
       @companies = Company.all
       if !company_params_filter.empty?
         if !(company_params_filter[:code]).empty?
-          @companies = @companies.where(code: company_params_filter[:code])
+          @companies = @companies.where("code LIKE ?", "%" + company_params_filter[:code] + "%")
         end
         if !(company_params_filter[:company_name]).empty?
-          @companies = @companies.where(company_name: company_params_filter[:company_name])
+          @companies = @companies.where("company_name LIKE ?", "%" + company_params_filter[:company_name] + "%")
         end
         if !(company_params_filter[:email]).empty?
-          @companies = @companies.where(email: company_params_filter[:email])
+          @companies = @companies.where("email LIKE ?", "%" + company_params_filter[:email] + "%")
         end
         if !(company_params_filter[:phone_number]).empty?
-          @companies = @companies.where(phone_number: company_params_filter[:phone_number])
+          @companies = @companies.where("phone_number LIKE ?", "%" + company_params_filter[:phone_number] + "%")
         end
         if !(company_params_filter[:status]).empty?
           @companies = @companies.where(status: company_params_filter[:status])
         end
       end
-      
       @companies = @companies.paginate(page: params[:page], per_page: per_page)
     end
 end
