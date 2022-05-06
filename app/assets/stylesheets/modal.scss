@@ -1,0 +1,63 @@
+.wrapper {
+    position: relative !important;
+} 
+
+.modal-background {
+    position: relative;
+    background-color: #212529;
+    opacity: 0.4;
+    height: calc(100vh - 66px);
+    z-index: 1;
+}
+
+.main-wrapper {
+    position: absolute;
+    top: 0;
+    left: 2.5%;
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form {
+        background-color: #fff;
+        width: 360px;
+        height: 180px;
+        padding: 1rem 1.2rem;
+        border-radius: 5px;
+        transform: translateY(-4.2rem);
+        span {
+            i {
+                margin-top: 3px;
+                font-size: 1.5rem;
+                color: #888;
+            }
+        }
+        .content-alert {
+            margin-left: 2.2rem;
+            p {
+                margin: 0;
+                font-size: 1.2rem;
+            }
+        }
+        .confirm-btn {
+            button {
+                margin: 0;
+                width: 134px;
+                border-radius: 3px !important;
+            }
+        }
+    }
+    #alert_success {
+        .check-success {
+            font-size: 1.5rem;
+            color: #1ABF33;
+        }
+        .success-btn {
+            button {
+                margin-top: 1.5rem;
+            }
+        }
+    }
+}

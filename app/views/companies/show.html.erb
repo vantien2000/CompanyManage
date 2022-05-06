@@ -1,39 +1,175 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @company.code %>
-</p>
-
-<p>
-  <strong>Company name:</strong>
-  <%= @company.company_name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @company.address %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @company.email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @company.phone %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @company.website %>
-</p>
-
-<p>
-  <strong>Logo:</strong>
-  <%= @company.logo %>
-</p>
-
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<% content_for :content do %>
+<div class="wrapper">
+  <div class="modal-background"></div>
+  <div class="modal">
+    <form id="alert_form">
+      <input type="hidden" name="form_value" id="form_value" value=""/>
+      <div class="alert px-0 d-flex">
+        <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span>
+        <div class="content-alert">
+          <p>Do you want to</p>
+          <p class="text-confirm-status">update these Company?</p>
+        </div>
+      </div>
+      <div class="confirm-btn d-flex justify-content-between align-items-center">
+        <button type="button" class="btn btn-success btn-sbm-alert">Ok</button>
+        <button type="button" class="btn btn-dark btn-cancel-alert">Cancer</button>
+      </div>
+    </form>
+    <form id="alert_success" class="d-none">
+      <div class="alert px-0 d-flex">
+        <span><i class="fa fa-check-circle check-success" aria-hidden="true"></i></i></span>
+        <div class="content-alert">
+          <p>update Company successfully!!</p>
+        </div>
+      </div>
+      <div class="success-btn d-flex justify-content-center align-items-center mt-3">
+        <button type="button" class="btn btn-primary btn-close-alert">Close</button>
+      </div>
+    </form>
+    <input type="hidden" name="status_after_post" id="status_after_post" value="<%= flash[:status] %>"/>
+  </div>
+  <div class="main-wrapper row">
+    <div class="col-lg-12 col-sm-12 title-main">
+      <h4 class="m-0">Company Details</h4>
+    </div>
+    <%= form_for @company , html: {class: "col-lg-12 col-sm-12 p-0", id: "company-details-frm"} do |f| %>
+        <div class="form-wrapper mt-4 p-0 mr-0 d-flex">
+            <table id="table-company-frm" class="table col-lg-6 col-sm-6">
+                <tr>
+                    <td width="20%">
+                    <%= f.label :code do %> 
+                        Code company<span class="text-danger">*</span>
+                    <% end %>
+                    </td>
+                    <td width="80%">
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                              <%= f.text_field :code , { class: "form-control disable d-block", placeholder: "Company code", disabled: true } %>
+                              <label class="error"><%= @company.errors.messages_for(:code).empty? ? '' : @company.errors.messages_for(:code)[0] %></label>
+                            </div>
+                            <div class="col-sm-7">
+                              <%= f.text_field :company_name , { class: "form-control disable d-block", placeholder: "Company name", disabled: true } %>
+                              <label class="error"><%= @company.errors.messages_for(:company_name).empty? ? '' : @company.errors.messages_for(:company_name)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :address do %> 
+                        Address<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <%= f.text_field :address , { class: "form-control d-block", placeholder: "Please enter address" } %>
+                                <label class="error d-block"><%= @company.errors.messages_for(:address).empty? ? '' : @company.errors.messages_for(:address)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :email do %> 
+                        Email<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                              <%= f.text_field :email , { class: "form-control d-block", placeholder: "Please enter email" } %>
+                              <label class="error d-block"><%= @company.errors.messages_for(:email).empty? ? '' : @company.errors.messages_for(:email)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :phone_number do %> 
+                        Phone number<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                              <%= f.text_field :phone_number , { class: "form-control d-block", placeholder: "Please enter phone number" } %>
+                              <label class="error d-block"><%= @company.errors.messages_for(:phone_number).empty? ? '' : @company.errors.messages_for(:phone_number)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :website do %> 
+                        Website
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.text_field :website , { class: "form-control", placeholder: "Please enter website" } %>
+                                <label class="error d-block"><%= @company.errors.messages_for(:website).empty? ? '' : @company.errors.messages_for(:website)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :staus do %> 
+                        Status
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8 d-flex align-items-center">
+                              <% if @company.status == 0%>
+                                <span class="text-danger text-status">STOP</span>
+                              <% elsif @company.status == 1%>
+                                <span class="text-success text-status">WORKING</span>
+                              <% elsif @company.status == 2 %>
+                                <span class="text-warning text-status">PENDING</span>
+                              <% end %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="col-lg-6 col-sm-6 upload-logo">
+                <tr height="114px">
+                    <td>
+                        <%= f.label :upload do %> 
+                          logo<span class="text-danger">*</span>
+                        <% end %>
+                        <%= image_tag(@company.logo.blank? ? 'default.png' : @company.logo_url, :alt => "default image", class: "d-block logo-img") %>
+                        <div class="btn btn-upload">
+                             <%= f.label :logo do %> 
+                            <i class="fa fa-camera" aria-hidden="true"></i>upload
+                            <% end %>
+                            <%= f.file_field :logo %>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="error"><%= @company.errors.messages_for(:logo).empty? ? '' : @company.errors.messages_for(:logo)[0] %></label>
+                  </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-12 col-sm-12 d-flex justify-content-between align-items-center my-4">
+          <ul class="nav group-btn-status">
+              <li class="nav-item">
+                <button type="button" data-company-code="<%= @company.code %>" data-status="1" class="btn btn-success">Working</button>
+              </li>
+              <li class="nav-item">
+                <button type="button" data-company-code="<%= @company.code %>" data-status="2" class="btn btn-warning">Pending</button>
+              </li>
+              <li class="nav-item">
+                <button type="button" data-company-code="<%= @company.code %>" data-status="0" class="btn btn-danger">Stop</button>
+              </li>
+          </ul>
+          <ul class="nav group-btn">
+              <li class="nav-item">
+                  <button type="button" data class="btn btn-primary btn-update">Update</button>
+              </li>
+              <li class="nav-item">
+                  <%= link_to "Back", { controller: 'companies' , action: 'index' }, class: "btn btn-dark" %>
+              </li>
+          </ul>
+        </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

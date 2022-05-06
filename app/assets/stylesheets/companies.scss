@@ -54,20 +54,23 @@ header .dropdown-menu {
     border-radius: 6px;
 }
 #company-management-frm, 
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     hr {
         border-bottom: 1px solid black;
     }
 }
 #company-management-frm,
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     #table-company-frm td label {
         font-size: 1rem;
         margin-bottom: 1rem;
     }
 }
 #company-management-frm,
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     #table-company-frm td {
         vertical-align: middle;
         border-top: none !important;
@@ -75,7 +78,8 @@ header .dropdown-menu {
 }
 
 #company-management-frm,
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     #table-company-frm td .form-control {
         border: 2px solid #72ACFF;
         height: 45px;
@@ -179,5 +183,26 @@ header .dropdown-menu {
             display: none;
             position: absolute;
         }
+    } 
+}
+#company-details-frm {
+    #table-company-frm {
+        input[type="text"] {
+            color: #212529;
+        }
+        .text-status {
+            font-size: 1.2rem;
+        }
     }
+}
+.group-btn-status,
+.group-btn {
+    button,a {
+        font-weight: 600;
+        color: #FFFFFF
+    }
+}
+.disable {
+    background: none !important;
+    color: #ccc !important;
 }
