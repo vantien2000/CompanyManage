@@ -1,6 +1,6 @@
 <% content_for :title, "Company register" %>
 <%= content_for :head do %>
-
+  <%= javascript_pack_tag 'apps/companies/company', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 <% content_for :content do %>
 <div class="wrapper">
@@ -8,65 +8,85 @@
     <div class="col-lg-12 col-sm-12 title-main">
       <h4 class="m-0">Company Management</h4>
     </div>
-    <%= form_for @company, html: {class: "col-lg-12 col-sm-12 p-0", id: "company-register-frm"} do |f| %>
+    <%= form_for @company, html: {class: "col-lg-12 col-sm-12 p-0", id: "company-register-frm", method: "POST"} do |f| %>
         <div class="form-wrapper mt-4 p-0 mr-0 d-flex">
             <table id="table-company-frm" class="table col-lg-6 col-sm-6">
                 <tr>
-                    <td width="20%"><label>Company Code <span class="text-danger">*</span></label></td>
+                    <td width="20%">
+                    <%= f.label :code do %> 
+                        Code company<span class="text-danger">*</span>
+                    <% end %>
+                    </td>
                     <td width="80%">
                         <div class="row form-group">
-                            <div class="col-sm-4">
-                                <input type="text" id="code" name="code" class="form-control" aria-describedby="emailHelp" placeholder="Company code" , value="<% params[:code] %>">
+                            <div class="col-sm-4 d-flex align-items-center">
+                                <%= f.text_field :code , { class: "form-control", placeholder: "Company code" } %>
+                                <label class="error"><%= @company.errors.messages_for(:code).empty? ? '' : @company.errors.messages_for(:code)[0] %></label>
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Company Name <span class="text-danger">*</span></label></td>
+                    <td><%= f.label :company_name do %> 
+                        Company name<span class="text-danger">*</span>
+                    <% end %></td>
                     <td>
                         <div class="row form-group">
-                            <div class="col-sm-8">
-                                <input type="text" name="company_name" id="company_name" class="form-control" placeholder="Please enter Company name" value="<% params[:company_name] %>">
+                            <div class="col-sm-8 d-flex align-items-center">
+                                <%= f.text_field :company_name , { class: "form-control", placeholder: "Please enter Company name" } %>
+                                <label class="error"><%= @company.errors.messages_for(:company_name).empty? ? '' : @company.errors.messages_for(:company_name)[0] %></label>
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Address <span class="text-danger">*</span></label></td>
+                    <td><%= f.label :address do %> 
+                        Address<span class="text-danger">*</span>
+                    <% end %></td>
                     <td>
                         <div class="row form-group">
-                            <div class="col-sm-12">
-                                <input type="text" name="address" id="address" class="form-control" placeholder="Please enter Address">
+                            <div class="col-sm-12 d-flex align-items-center">
+                                <%= f.text_field :address , { class: "form-control", placeholder: "Please enter address" } %>
+                                <label class="error"><%= @company.errors.messages_for(:address).empty? ? '' : @company.errors.messages_for(:address)[0] %></label>
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="email">Email <span class="text-danger">*</span></label></td>
+                    <td><%= f.label :email do %> 
+                        Email<span class="text-danger">*</span>
+                    <% end %></td>
                     <td>
                         <div class="row form-group">
-                            <div class="col-sm-8">
-                                <input type="email" name="email" class="form-control" id="email" placeholder="Please enter Email">
+                            <div class="col-sm-8 d-flex align-items-center">
+                                <%= f.text_field :email , { class: "form-control", placeholder: "Please enter email" } %>
+                                <label class="error"><%= @company.errors.messages_for(:email).empty? ? '' : @company.errors.messages_for(:email)[0] %></label>
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="phone_number">Phone number <span class="text-danger">*</span></label></td>
+                    <td><%= f.label :phone_number do %> 
+                        Phone number<span class="text-danger">*</span>
+                    <% end %></td>
                     <td>
                         <div class="row form-group">
-                            <div class="col-sm-8">
-                                <input type="text" name="phone_number" id="phone_number" class="form-control" id="phone_number" placeholder="Please enter Phone number">
+                            <div class="col-sm-8 d-flex align-items-center">
+                                <%= f.text_field :phone_number , { class: "form-control", placeholder: "Please enter phone number" } %>
+                                <label class="error"><%= @company.errors.messages_for(:phone_number).empty? ? '' : @company.errors.messages_for(:phone_number)[0] %></label>
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="phone_number">Website </label></td>
+                    <td><%= f.label :website do %> 
+                        Website
+                    <% end %></td>
                     <td>
                         <div class="row form-group">
-                            <div class="col-sm-8">
-                                <input type="text" id="website" name="website" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Website">
+                            <div class="col-sm-8 d-flex align-items-center">
+                                <%= f.text_field :website , { class: "form-control", placeholder: "Please enter website" } %>
+                                <label class="error"><%= @company.errors.messages_for(:website).empty? ? '' : @company.errors.messages_for(:website)[0] %></label>
                             </div>
                         </div>
                     </td>
@@ -75,18 +95,21 @@
             <table class="col-lg-6 col-sm-6 upload-logo">
                 <tr height="114px">
                     <td>
-                        <label>Logo <span class="text-danger">*</span></label>
-                        <%= image_tag("default.png", :alt => "default image", class: "d-block logo-img") %>
+                        <%= f.label :upload do %> 
+                        logo<span class="text-danger">*</span>
+                    <% end %>
+                        <%= image_tag(@company.logo.blank? ? 'default.png' : @company.logo, :alt => "default image", class: "d-block logo-img") %>
                         <div class="btn btn-upload">
-                            <label for="upload"><i class="fa fa-camera" aria-hidden="true"></i>upload</label>
-                            <input type="file" id="upload"/>
+                             <%= f.label :logo do %> 
+                            <i class="fa fa-camera" aria-hidden="true"></i>upload
+                            <% end %>
+                            <%= f.file_field :logo %>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" class="d-block" id="logo_image" name="logo_image">
-                        <label id="error_image" class="d-block error"></label>
+                        <label class="error"><%= @company.errors.messages_for(:logo).empty? ? '' : @company.errors.messages_for(:logo)[0] %></label>
                     </td>
                 </tr>
             </table>
