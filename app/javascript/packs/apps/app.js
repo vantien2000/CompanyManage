@@ -3,5 +3,5 @@
 * Copyright 2014-2022 Colorlib <https://colorlib.com>
 * Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
 */
-import "./companies/company"
 import "./login";
+import "./companies/company";

@@ -12,7 +12,7 @@
     border: 1px solid black;
 }
 .login-wrapper {
-    height: 500px;
+    height: 600px;
     margin: auto;
 }
 #form-login .form-group {
@@ -39,4 +39,12 @@
     width: 60%;
     text-align: center;
     margin: 2rem auto;
+}
+.btn-sign-up {
+    background-color: #30C0F0 !important;
+    border: 1px solid #30C0F0 !important;
+}
+.btn-login {
+    background-color: #18C090 !important;
+    border: 1px solid #18C090 !important; 
 }

@@ -41,7 +41,7 @@ select::after {
     content: "";
     right: 10px;
 }
-
  @import url('./bootstrap.scss');
  @import url('./companies.scss');
  @import url('./pagination.scss');
+ @import url('./modal.scss');

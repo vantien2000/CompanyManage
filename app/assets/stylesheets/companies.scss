@@ -54,20 +54,23 @@ header .dropdown-menu {
     border-radius: 6px;
 }
 #company-management-frm, 
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     hr {
         border-bottom: 1px solid black;
     }
 }
 #company-management-frm,
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     #table-company-frm td label {
         font-size: 1rem;
         margin-bottom: 1rem;
     }
 }
 #company-management-frm,
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     #table-company-frm td {
         vertical-align: middle;
         border-top: none !important;
@@ -75,7 +78,8 @@ header .dropdown-menu {
 }
 
 #company-management-frm,
-#company-register-frm {
+#company-register-frm,
+#company-details-frm {
     #table-company-frm td .form-control {
         border: 2px solid #72ACFF;
         height: 45px;
@@ -83,10 +87,11 @@ header .dropdown-menu {
     }
 }
 
-.group-btn a, button {
+.group-btn a, button, input[type="submit"] {
     width: 120px;
     height: 40px;
     border-radius: 10px !important;
+    font-weight: 600;
     margin-left: 10px;
 }
 .table-company {
@@ -162,9 +167,10 @@ header .dropdown-menu {
         background-color: #eee;
     }
     .btn-upload {
-        label {
+        position: relative;;
+        label.logo_img_label {
             cursor: pointer;
-            position: relative;
+            position: absolute;
             background-color: #0058FF;
             padding: 5px 10px;
             color: #fff;
@@ -176,8 +182,34 @@ header .dropdown-menu {
             }
         }
         input {
-            display: none;
-            position: absolute;
+            position: relative;
+            opacity: 0;
+        }
+        label[for=company_logo].error {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+    } 
+}
+#company-details-frm {
+    #table-company-frm {
+        input[type="text"] {
+            color: #212529;
+        }
+        .text-status {
+            font-size: 1.2rem;
         }
     }
+}
+.group-btn-status,
+.group-btn {
+    button,a {
+        font-weight: 600;
+        color: #FFFFFF
+    }
+}
+.disable {
+    background: none !important;
+    color: #ccc !important;
 }

@@ -1,5 +1,10 @@
 class LoginController < ApplicationController
   layout "login"
+
+  @@superAdmin = 1
+  @@company = 2
+  @@user = 3
+
   def index
 
   end
@@ -9,21 +14,20 @@ class LoginController < ApplicationController
     session[:old_password] = params[:params]
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.user_id
-      rolesLogin session[:user_id]
+      role = UserRole.where(user_id: user.user_id).first()
+      if role[:user_id] == @@superAdmin
+        session[:user_id] = user.user_id
+        redirect_to "/companies"
+      end
+      if role[:user_id] == @@company
+        render html: 'đây là company account'
+      end
+      if role[:user_id] == @@user
+        render html: 'đây là user account'
+      end
     else
       flash[:error] = "Account Invalid! Please check your email and password"
       redirect_to "/login"
-    end
-  end
-
-  def rolesLogin user_id
-    user_role = UserRole.select('role_id').where('user_id', session[:user_id]).first()
-    case user_role['role_id']
-    when 1
-      redirect_to "/companies"
-    when 2
-      render html: "AAA"
     end
   end
 

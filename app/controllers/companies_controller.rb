@@ -1,6 +1,11 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[ show edit update destroy ]
+  before_action :middleware_login
 
+  def middleware_login
+    if !login_in?
+      redirect_to "/login" 
+    end
+  end
   # GET /companies or /companies.json
   def index
     per_page = params[:per_page] ? params[:per_page] : 5
@@ -11,6 +16,8 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1 or /companies/1.json
   def show
+    flash[:status] = ''
+    @company = Company.find_by(code: params[:id])
   end
 
   # GET /companies/new
@@ -24,28 +31,39 @@ class CompaniesController < ApplicationController
 
   # POST /companies or /companies.json
   def create
-    @company = Company.new(comapny_params)
-
-    respond_to do |format|
-      if @company.save
-        format.html { redirect_to company_url(@company), notice: "Company was successfully created." }
-        format.json { render :show, status: :created, location: @company }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
-      end
+    @company = Company.new(company_params)
+    if @company.save
+      redirect_to action: 'index'
+    else
+      render action: 'new'
     end
+    # respond_to do |format|
+    #   if @company.save
+    #     format.html { redirect_to company_url(@company), notice: "Company was successfully created." }
+    #     format.json { render :show, status: :created, location: @company }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @company.errors, status: :unprocessable_entity }
+    #   end
   end
 
   # PATCH/PUT /companies/1 or /companies/1.json
   def update
+    @company = Company.find(params[:id])
+    if @company.update(company_params)
+      flash[:status] = 'success'
+      render 'show'
+    else
+      render 'show'
+    end
+  end
+
+  def updateStatus
     respond_to do |format|
-      if @company.update(comapny_params)
-        format.html { redirect_to company_url(@company), notice: "Company was successfully updated." }
-        format.json { render :show, status: :ok, location: @company }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+      status = params[:status].to_i
+      @company = Company.find(params[:code])
+      if @company.update_attribute(:status, status)
+        format.json { render json: true }
       end
     end
   end
@@ -65,10 +83,9 @@ class CompaniesController < ApplicationController
     def set_company
       @company = Company.find(params[:id])
     end
-
     # Only allow a list of trusted parameters through.
     def company_params
-      params.require(:company).permit(:code, :company_name, :address, :email, :phone_number, :website, :logo, :status)
+      params.require(:company).permit(:code, :company_name, :address, :email, :phone_number, :website, :logo)
     end
 
     def company_params_filter
