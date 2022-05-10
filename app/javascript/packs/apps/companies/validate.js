@@ -30,7 +30,7 @@ $(document).ready(function() {
       "company[logo]": {
         required: true,
         accept: "jpeg|png|jpg|gif|webp|bmp|svg",
-        filesize: 1048576
+
       }
     },
     messages: {
@@ -72,7 +72,7 @@ $(document).ready(function() {
   });
 
   $.validator.addMethod("validateEmail", function (value, element) {
-    return this.optional(element) || /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(value);
+    return this.optional(element) || /^[\w+\-.]{2,}@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+$/i.test(value);
   });
   $.validator.addMethod("validatePhone", function (value, element) {
     return this.optional(element) || /(84|0[3|5|7|8|9])+([0-9]{8})\b/g.test(value);

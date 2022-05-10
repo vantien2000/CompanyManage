@@ -19,6 +19,11 @@ header .logo {
     font-size: 2rem;
     font-weight: 400;
 }
+
+header .logo > img {
+    width: 60px;
+    height: 60px;
+}
 .nav-menu-header {
     display: flex;
     align-items: center;
@@ -63,6 +68,9 @@ header .dropdown-menu {
 #company-management-frm,
 #company-register-frm,
 #company-details-frm {
+    .form-group {
+        margin: 0px;
+    }
     #table-company-frm td label {
         font-size: 1rem;
         margin-bottom: 1rem;
@@ -82,8 +90,12 @@ header .dropdown-menu {
 #company-details-frm {
     #table-company-frm td .form-control {
         border: 2px solid #72ACFF;
-        height: 45px;
-        border-radius: 10px !important;
+        height: 50px;
+        border-radius: 5px !important;
+        margin: 0px;
+    }
+    #table-company-frm td label{
+        margin: 0px;
     }
 }
 
@@ -114,6 +126,14 @@ header .dropdown-menu {
     border: 0.5px solid #C8C8C8;
     opacity: 1;
     vertical-align: middle;
+}
+.btn-register {
+    background-color: #18C090 !important;
+    border: 1px #18C090 !important;
+}
+.btn-search {
+    background-color: #0058FF !important;
+    border: 1px solid #0058FF !important;
 }
 #table-company-content .col-content .btn {
     width: 100px;

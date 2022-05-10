@@ -16,7 +16,6 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1 or /companies/1.json
   def show
-    flash[:status] = ''
     @company = Company.find_by(code: params[:id])
   end
 
@@ -51,20 +50,19 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
     if @company.update(company_params)
-      flash[:status] = 'success'
-      render 'show'
+      flash[:status] = "success"
+      redirect_to @company
     else
       render 'show'
     end
   end
 
   def updateStatus
-    respond_to do |format|
-      status = params[:status].to_i
-      @company = Company.find(params[:code])
-      if @company.update_attribute(:status, status)
-        format.json { render json: true }
-      end
+    status = params[:status].to_i
+    @company = Company.find(params[:code])
+    if @company.update_attribute(:status, status)
+      flash[:status] = "success"
+      redirect_to @company
     end
   end
 
