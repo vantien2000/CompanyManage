@@ -87,10 +87,11 @@ header .dropdown-menu {
     }
 }
 
-.group-btn a, button {
+.group-btn a, button, input[type="submit"] {
     width: 120px;
     height: 40px;
     border-radius: 10px !important;
+    font-weight: 600;
     margin-left: 10px;
 }
 .table-company {
@@ -166,9 +167,10 @@ header .dropdown-menu {
         background-color: #eee;
     }
     .btn-upload {
-        label {
+        position: relative;;
+        label.logo_img_label {
             cursor: pointer;
-            position: relative;
+            position: absolute;
             background-color: #0058FF;
             padding: 5px 10px;
             color: #fff;
@@ -180,8 +182,13 @@ header .dropdown-menu {
             }
         }
         input {
-            display: none;
-            position: absolute;
+            position: relative;
+            opacity: 0;
+        }
+        label[for=company_logo].error {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
         }
     } 
 }

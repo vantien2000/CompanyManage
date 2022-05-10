@@ -1,10 +1,8 @@
 $(document).ready(function() {
-    $('.modal').hide();
-    $('.modal-background').hide();
     $('.group-btn-status, .group-btn').on('click', 'button', function(e) {
         e.preventDefault();
-        $('.modal').show();
-        $('.modal-background').show();
+        $('.modal').addClass('d-flex');
+        $('.modal-background').addClass('d-block');
         if ($(this).parent().parent().hasClass('group-btn-status')) {
             $('#form_value').val(JSON.stringify({status : $(this).data('status'), code : $(this).data('company-code')}));
             $('.text-confirm-status').text('change status these Company?');
@@ -15,15 +13,14 @@ $(document).ready(function() {
             $('.text-confirm-status').text('update these Company?');
         }
     });
-    $('.modal .btn-cancel-alert').on('click', function(e) {
-        $('.modal').hide();
-        $('.modal-background').hide();
+    $('.btn-cancel-alert').on('click', function(e) {
+        $('.modal').removeClass('d-flex');
+        $('.modal-background').removeClass('d-block');
     });
     let status = $('#status_after_post').val();
-    console.log(status);
-    if (status == 'success') {
-        $('.modal-background').css('display','block');
-        $('.modal').css('display','flex');
+    if (status === 'success') {
+        $('.modal-background').addClass('d-block');
+        $('.modal').addClass('d-flex');
         $('#alert_form').addClass('d-none');
         $('#alert_success').removeClass('d-none');
     }

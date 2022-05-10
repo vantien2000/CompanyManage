@@ -1,5 +1,5 @@
-import "./management"
 import "./register";
-import "./validate";
 import "./modal";
+import "./management";
 import "./details";
+import "./validate";

@@ -1,6 +1,11 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[ show edit update destroy ]
+  before_action :middleware_login
 
+  def middleware_login
+    if !login_in?
+      redirect_to "/login" 
+    end
+  end
   # GET /companies or /companies.json
   def index
     per_page = params[:per_page] ? params[:per_page] : 5
@@ -11,6 +16,8 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1 or /companies/1.json
   def show
+    flash[:status] = ''
+    @company = Company.find_by(code: params[:id])
   end
 
   # GET /companies/new
@@ -42,6 +49,7 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1 or /companies/1.json
   def update
+    @company = Company.find(params[:id])
     if @company.update(company_params)
       flash[:status] = 'success'
       render 'show'
