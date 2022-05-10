@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
 
   def middleware_login
     if !login_in?
-      redirect_to "/login" 
+      redirect_to "/login"
     end
   end
   # GET /companies or /companies.json
@@ -68,8 +68,8 @@ class CompaniesController < ApplicationController
 
   # DELETE /companies/1 or /companies/1.json
   def destroy
+    @company = Company.find(params[:id])
     @company.destroy
-
     respond_to do |format|
       format.html { redirect_to companies_url, notice: "Company was successfully destroyed." }
       format.json { head :no_content }
@@ -108,6 +108,6 @@ class CompaniesController < ApplicationController
           @companies = @companies.where(status: company_params_filter[:status])
         end
       end
-      @companies = @companies.paginate(page: params[:page], per_page: per_page)
+      @companies = @companies.paginate(page: params[:page], per_page: per_page).order('companies.code DESC')
     end
 end
