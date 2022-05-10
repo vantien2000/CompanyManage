@@ -2,7 +2,7 @@ class Company < ApplicationRecord
     mount_uploader :logo, ImageUploader
 
     VALID_CODE_REGEX= /\A([A-Za-z]|[0-9]){6}\z/i
-    VALID_EMAIL_REGEX= /\A[\w+\-.]{2,}@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+$\z/i
+    VALID_EMAIL_REGEX= /\A[\w+\-.]{2,}@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     VALID_PHONE_REGEX= /(84|0[3|5|7|8|9])+([0-9]{8,9})\b/i
     VALID_IMAGE_REGEX= /.*\.(gif|jpeg|bmp|webp|svg|jpg|png)\z/i
 
@@ -17,5 +17,5 @@ class Company < ApplicationRecord
     validates :phone_number, presence: { message: "Phone number is required" }, format: {with: VALID_PHONE_REGEX, message: 'Please enter a valid phone number'}
     validates :website, length: {maximum: 256, message: "Website be at least 256 characters long"}
     validates :logo, presence: { message: "Logo is required" }
-    validates_size_of :logo, maximum: 1.megabytes, message: "Logo souble be less than 1MB"
+    # validates_size_of :logo, maximum: 1.megabytes, message: "Logo souble be less than 1MB"
 end
