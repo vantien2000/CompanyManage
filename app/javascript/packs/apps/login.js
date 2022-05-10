@@ -1,10 +1,10 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
 	$("#form-login").validate({
 		rules: {
 		  "email": {
 			required: true,
 			maxlength: 256,
-			vaidateEmail: true,
+			vaidateEmail: true
 		  },
 		  "password": {
 			required: true,
@@ -26,8 +26,9 @@ $(document).ready(function() {
 		  form.submit();
 		}
 	 });
+	
 
-	$.validator.addMethod("validateEmail", function (value, element) {
+	$.validator.addMethod("vaidateEmail", function (value, element) {
 		return this.optional(element) || /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(value);
 	}, "Please enter a valid email address");
 })

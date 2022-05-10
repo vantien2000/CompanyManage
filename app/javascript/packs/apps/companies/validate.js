@@ -1,64 +1,71 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $("#company-register-frm").validate({
     rules: {
-      "code": {
+      "company[code]": {
         required: true,
-        validateCode: true
+        validateCode: true,
+        maxlength: 6,
+        minlength: 6
       },
-      "company_name": {
-        required: true,
-        maxlength: 256
-      },
-      "address": {
+      "company[company_name]": {
         required: true,
         maxlength: 256
       },
-      "email": {
+      "company[address]": {
+        required: true,
+        maxlength: 256
+      },
+      "company[email]": {
         required: true,
         maxlength: 256,
-        vaidateEmail: true,
+        validateEmail: true,
       },
-      "phone_number": {
+      "company[phone_number]": {
         required: true,
         validatePhone: true
       },
-      "website": {
+      "company[website]": {
         maxlength: 256
       },
-      "logo_image" : {
-        required: true
+      "company[logo]": {
+        required: true,
+        accept: "jpeg|png|jpg|gif|webp|bmp|svg",
+        filesize: 1048576
       }
     },
     messages: {
-      "code": {
+      "company[code]": {
         required: "Code is required",
         validateCode: "Please enter a valid Code",
+        maxlength: "Code should be 6 charecter",
+        minlength: "Code should be 6 charecter"
       },
-      "company_name": {
+      "company[company_name]": {
         required: "Company name is required",
         maxlength: "Company name be at least 256 characters long",
       },
-      "address": {
+      "company[address]": {
         required: "Address name is required",
         maxlength: "Address be at least 256 characters long"
       },
-      "email": {
+      "company[email]": {
         required: "Email is required",
         maxlength: "Your Email must be at least 256 characters long",
         validateEmail: "Please enter a valid email address"
       },
-      "phone_number": {
+      "company[phone_number]": {
         required: "Phone number is required",
         validatePhone: "Please enter a valid phone number"
       },
-      "website": {
+      "company[website]": {
         maxlength: "Website be at least 256 characters long"
       },
-      "logo_image" : {
-        required: "Logo image is required"
+      "company[logo]": {
+        required: "Logo is required",
+        accept: "Logo must be JPEG, PNG, SVG, WEBP, BMP, JPG, GIF",
+        filesize: "Logo souble be less than 1MB"
       }
     },
-
     submitHandler: function (form) {
       form.submit();
     }
@@ -68,9 +75,12 @@ $(document).ready(function () {
     return this.optional(element) || /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(value);
   });
   $.validator.addMethod("validatePhone", function (value, element) {
-    return this.optional(element) || /(84|0[3|5|7|8|9])+([0-9]{9})\b/g.test(value);
+    return this.optional(element) || /(84|0[3|5|7|8|9])+([0-9]{8})\b/g.test(value);
   });
   $.validator.addMethod("validateCode", function (value, element) {
-    return this.optional(element) || /^([A-Za-z]|[0-9]){6}$/i.test(value);
+    return this.optional(element) || /^([A-Za-z]|[0-9])+$/i.test(value);
+  });
+  $.validator.addMethod('filesize', function(value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param);
   });
 });
