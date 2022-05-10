@@ -116,6 +116,7 @@ header .dropdown-menu {
     border-radius: 6px;
     opacity: 1;
     height: 450px;
+    overflow: auto;
 }
 #table-company-content th {
     background-color: #72ACFF;
@@ -126,6 +127,7 @@ header .dropdown-menu {
     border: 0.5px solid #C8C8C8;
     opacity: 1;
     vertical-align: middle;
+    word-break: break-all;
 }
 .btn-register {
     background-color: #18C090 !important;
@@ -141,14 +143,17 @@ header .dropdown-menu {
 #table-company-content .col-content .btn-status-stop {
     background: #92929D 0% 0% no-repeat padding-box;
     border: 1px solid #92929D;
+    border-radius: 6px;
 }
 #table-company-content .col-content .btn-status-working {
     background: #11AA0C 0% 0% no-repeat padding-box;
     border: 1px solid #11AA0C;
+    border-radius: 6px;
 }
 #table-company-content .col-content .btn-status-pending {
     background: #E9CB03 0% 0% no-repeat padding-box;
     border: 1px solid #E9CB03;
+    border-radius: 6px;
 }
 #table-company-content .col-content .btn-detail {
     background: #30C0F0 0% 0% no-repeat padding-box;
@@ -157,6 +162,7 @@ header .dropdown-menu {
 #table-company-content .col-content .btn-remove {
     background: #D31212 0% 0% no-repeat padding-box;
     border: 1px solid #D31212;
+    border-radius: 6px;
 }
 .form-wrapper {
     padding: 0px 2.5rem !important;
