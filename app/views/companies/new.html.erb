@@ -95,7 +95,7 @@
                         <%= f.label :upload do %> 
                         logo<span class="text-danger">*</span>
                     <% end %>
-                        <%= image_tag(@company.logo.blank? ? 'default.png' : @company.logo, :alt => "default image", class: "d-block logo-img ml-3") %>
+                        <%= image_tag(!@company.logo? ? 'default.png' : @company.logo_url, :alt => "default image", class: "d-block logo-img ml-3") %>
                         <div class="btn btn-upload">
                              <%= f.label :logo, { class: "logo_img_label" } do %> 
                             <i class="fa fa-camera" aria-hidden="true"></i>upload
