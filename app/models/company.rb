@@ -1,9 +1,9 @@
 class Company < ApplicationRecord
     mount_uploader :logo, ImageUploader
 
-    VALID_CODE_REGEX= /\A([A-Za-z]|[0-9]){6}\z/iu
-    VALID_EMAIL_REGEX= /\A[\w+\-.]{2,}@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/iu
-    VALID_PHONE_REGEX= /(84|0[3|5|7|8|9])+([0-9]{8,9})\b/iu
+    VALID_CODE_REGEX= /\(\w+[0-9]+)|([0-9]+\w+)/i
+    VALID_EMAIL_REGEX= /\A[\w+\-.]{2,}@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    VALID_PHONE_REGEX= /(84|0[3|5|7|8|9])+([0-9]{8,9})\b/i
     VALID_IMAGE_REGEX= /.*\.(gif|jpeg|bmp|webp|svg|jpg|png)\z/iu
 
     self.table_name = "companies"
