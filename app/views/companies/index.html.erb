@@ -55,10 +55,10 @@
       <div class="col-lg-12 col-sm-12 d-flex justify-content-end align-items-center my-4">
         <ul class="nav group-btn">
           <li class="nav-item">
-            <%= link_to "Register", { controller: 'companies' , action: 'new' }, class: "btn btn-success" %>
+            <%= link_to "Register", { controller: 'companies' , action: 'new' }, class: "btn btn-success btn-register" %>
           </li>
           <li class="nav-item">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <%= form.submit :Search, { class: "btn btn-primary btn-search" } %>
           </li>
           <li class="nav-item">
             <a class="btn btn-dark" href>Back</a>
@@ -91,12 +91,14 @@
                   <td class="col-content"><span class="btn btn-dark btn-status-stop">Stopped</span></td>
                 <% elsif company.status == 1 %>
                   <td class="col-content"><span class="btn btn-dark btn-status-working">Working</span></td>
-                <% else %>
+                <% elsif company.status == 2 %>
                   <td class="col-content"><span class="btn btn-dark btn-status-pending">Pending</span></td>
+                <% else %>
+                  <td class="col-content"></td>
                 <% end %>
                 <td class="col-content">
-                  <%= link_to 'Detail', company, class: "btn btn-dark btn-detail" %>
-                  <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-dark btn-remove"%>
+                  <%= link_to 'Detail', company, class: "btn btn-dark btn-detail mr-2" %>
+                  <%= link_to 'Delete', company, method: :DELETE, data: { confirm: 'Are you sure?' }, class: "btn btn-dark btn-remove", html: { value: "Delete" } %>
                 </td>
               </tr>
             <% end %>
