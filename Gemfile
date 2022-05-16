@@ -30,7 +30,11 @@ gem 'fog-aws', '~> 0.7.6'
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap4'
 gem 'bcrypt-ruby'
-
+gem "capistrano"
+gem "capistrano3-puma"
+gem "capistrano-rails", require: false
+gem "capistrano-bundler", require: false
+gem "capistrano-rvm"
 gem 'rails_param'
 
 gem 'net-smtp' # to send email
