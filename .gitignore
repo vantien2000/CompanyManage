@@ -31,13 +31,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-# Other
-/config/database.yml
-public/*
-.env
-coverage/
-.rspec
-
+/config/webpack/*
 config/settings/*.local.yml
 config/environments/*.local.yml
 /public/packs
