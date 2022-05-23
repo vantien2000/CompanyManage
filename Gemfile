@@ -7,8 +7,6 @@ ruby '3.1.2'
 gem 'rails', '~> 6.1.5'
 # # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '~> 1.4'
-# Use Puma as the app server
-gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -30,17 +28,12 @@ gem 'fog-aws', '~> 0.7.6'
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap4'
 gem 'bcrypt-ruby'
-gem "capistrano"
-gem "capistrano3-puma"
-gem "capistrano-rails", require: false
-gem "capistrano-bundler", require: false
-gem "capistrano-rvm"
 gem 'rails_param'
-
+gem "puma",  '~> 5.0'
 gem 'net-smtp' # to send email
 gem 'net-imap' # for rspec
 gem 'net-pop'  # for rspec
-
+gem 'unicorn'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
