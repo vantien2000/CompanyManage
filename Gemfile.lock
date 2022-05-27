@@ -90,6 +90,7 @@ GEM
     childprocess (4.1.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    digest (3.1.0)
     erubi (1.10.0)
     excon (0.92.3)
     ffi (1.15.5)
@@ -120,6 +121,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kgio (2.11.4)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -137,6 +139,20 @@ GEM
     msgpack (1.5.1)
     multi_json (1.15.0)
     mysql2 (0.5.3)
+    net-imap (0.2.3)
+      digest
+      net-protocol
+      strscan
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
+    net-protocol (0.1.3)
+      timeout
+    net-smtp (0.3.1)
+      digest
+      net-protocol
+      timeout
     nio4r (2.5.8)
     nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
@@ -172,15 +188,21 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_param (1.3.0)
       actionpack (>= 3.2.0)
       activesupport (>= 3.2.0)
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (6.1.5)
       actionpack (= 6.1.5)
       activesupport (= 6.1.5)
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
+    raindrops (0.20.0)
     rake (13.0.6)
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
@@ -213,15 +235,19 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     ssrf_filter (1.0.7)
+    strscan (3.0.3)
     thor (1.2.1)
     tilt (2.0.10)
+    timeout (0.2.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -261,17 +287,21 @@ DEPENDENCIES
   listen (~> 3.3)
   mini_magick
   mysql2 (~> 0.5)
+  net-imap
+  net-pop
+  net-smtp
   pg (= 1.1.4)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.5)
+  rails_12factor (= 0.0.2)
   rails_param
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
+  unicorn
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)

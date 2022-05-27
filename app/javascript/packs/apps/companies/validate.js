@@ -77,7 +77,7 @@ $(document).ready(function() {
     return this.optional(element) || /(84|0[3|5|7|8|9])+([0-9]{8})\b/gu.test(value);
   });
   $.validator.addMethod("validateCode", function (value, element) {
-    return this.optional(element) || /^([A-Za-z]|[0-9])+$/iu.test(value);
+    return this.optional(element) || /(\w+[0-9]+)|([0-9]+\w+)/iu.test(value);
   });
   $.validator.addMethod('filesize', function(value, element, param) {
     return this.optional(element) || (element.files[0].size <= param);

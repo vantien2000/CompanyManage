@@ -5,10 +5,8 @@ ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-# Use Puma as the app server
-gem 'puma', '~> 5.0'
+# # Use sqlite3 as the database for Active Record
+# gem 'sqlite3', '~> 1.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -30,9 +28,12 @@ gem 'fog-aws', '~> 0.7.6'
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap4'
 gem 'bcrypt-ruby'
-
 gem 'rails_param'
-
+gem "puma",  '~> 5.0'
+gem 'net-smtp' # to send email
+gem 'net-imap' # for rspec
+gem 'net-pop'  # for rspec
+gem 'unicorn'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -64,6 +65,7 @@ end
 
 group :production do
   gem 'pg', '1.1.4'
+  gem "rails_12factor", "0.0.2"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

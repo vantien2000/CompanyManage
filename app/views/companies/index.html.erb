@@ -91,8 +91,10 @@
                   <td class="col-content"><span class="btn btn-dark btn-status-stop">Stopped</span></td>
                 <% elsif company.status == 1 %>
                   <td class="col-content"><span class="btn btn-dark btn-status-working">Working</span></td>
-                <% else %>
+                <% elsif company.status == 2 %>
                   <td class="col-content"><span class="btn btn-dark btn-status-pending">Pending</span></td>
+                <% else %>
+                  <td class="col-content"></td>
                 <% end %>
                 <td class="col-content">
                   <%= link_to 'Detail', company, class: "btn btn-dark btn-detail mr-2" %>
