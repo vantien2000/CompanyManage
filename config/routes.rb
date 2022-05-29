@@ -1,7 +1,6 @@
 
 Rails.application.routes.draw do
   resources :profiles
-  resources :posts
   root 'companies#index'
   resources :companies
   post 'companies/status', to: 'companies#updateStatus', as: 'update_status';

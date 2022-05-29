@@ -137,6 +137,23 @@ header .dropdown-menu {
     background-color: #0058FF !important;
     border: 1px solid #0058FF !important;
 }
+
+#profile_code {
+    border: 2px solid #72ACFF;
+    height: 50px;
+    border-radius: 5px !important;
+    margin: 0px;
+}
+
+.btn-profiles {
+    background: #000;
+    color: #fff !important;
+    border-radius: 10px;
+    height: 40px;
+    width: 113px;
+    margin-left: 10px;
+}
+
 #table-company-content .col-content .btn {
     width: 100px;
 }
@@ -155,6 +172,7 @@ header .dropdown-menu {
     border: 1px solid #E9CB03;
     border-radius: 6px;
 }
+
 #table-company-content .col-content .btn-detail {
     background: #30C0F0 0% 0% no-repeat padding-box;
     border: 1px solid #30C0F0;

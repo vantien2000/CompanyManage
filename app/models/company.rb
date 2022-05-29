@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
     mount_uploader :logo, ImageUploader
-
+    serialize :logo, String
     VALID_CODE_REGEX= /(\w+[0-9]+)|([0-9]+\w+)/i
     VALID_EMAIL_REGEX= /\A[\w+\-.]{2,}@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     VALID_PHONE_REGEX= /(84|0[3|5|7|8|9])+([0-9]{8,9})\b/i
@@ -9,7 +9,7 @@ class Company < ApplicationRecord
     self.table_name = "companies"
     self.primary_key = "code"
 
-    validates :code, presence: { message: "Code is required" }, length: {is: 6, message: "Company code must have 6 characters!"}, format: { with: VALID_CODE_REGEX, message: 'Please enter a valid code' },
+    validates :code, presence: { message: "Code is required" }, length: { is: 6, message: "Company code must have 6 characters!" }, format: { with: VALID_CODE_REGEX, message: 'Please enter a valid code' },
     uniqueness: { case_sensitive: false, message: "Company code must be unique!" }
     validates :company_name, presence: { message: "Company name is required" }, length: {maximum: 256, message: "Company name be at least 256 characters long"}
     validates :address, presence: { message: "Address is required" }, length: {maximum: 256, message: "Address be at least 256 characters long"}
@@ -18,4 +18,5 @@ class Company < ApplicationRecord
     validates :website, length: {maximum: 256, message: "Website be at least 256 characters long"}
     validates :logo, presence: { message: "Logo is required" }
     # validates_size_of :logo, maximum: 1.megabytes, message: "Logo souble be less than 1MB"
+    scope :getCompanyByIds, -> code { where("code  IN (?)", code).pluck(:company_name, :code) }
 end

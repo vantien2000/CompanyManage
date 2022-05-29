@@ -162,6 +162,9 @@
               <li class="nav-item">
                 <button type="button" data-url-status-update="<%= update_status_path %>" data-code="<%= @company.code %>"s data-status="0" class="btn btn-danger">Stop</button>
               </li>
+            <li class="nav-item">
+              <%= link_to "Profiles", { controller: 'profiles' , action: 'index' }, class: "btn btn-profiles" %>
+            </li>
           </ul>
           <ul class="nav group-btn">
               <li class="nav-item">
