@@ -5,14 +5,14 @@
     <div class="col-lg-12 col-sm-12 title-main">
       <h4 class="m-0">Company Management</h4>
     </div>
-    <%= form_with(url: "/profiles", method: "get" ,class: "col-lg-12 col-sm-12", id: "company-management-frm") do |form| %>
+    <%= form_with(url: company_profiles_path, method: "get" ,class: "col-lg-12 col-sm-12", id: "company-management-frm") do |form| %>
       <table id="table-company-frm" class="table col-lg-5 col-sm-5 mt-4">
         <tr>
           <td><label>Company</label><td>
           <td>
             <div class="row form-group">
               <div class="col-sm-4">
-                <%= form.select :code, @codeCompanyProfiles, {selected: @params["code"]}, {class: "form-control"} %>
+                <%= form.select :code, @codeCompanyProfiles, { selected: @params["code"] }, { class: "form-control" } %>
               </div>
               <div class="col-sm-8">
                 <input type="text" name="company_name" id="company_name" class="form-control" aria-describedby="emailHelp" placeholder="Please enter Company name" value=<%= @params["company_name"] %>>
@@ -63,7 +63,7 @@
       </table>
       <hr>
       <div class="col-lg-12 col-sm-12 d-flex justify-content-end align-items-center my-4">
-        <ul class="nav group-btn">
+        <ul class="nav profile-group-btn">
           <li class="nav-item">
             <%= link_to "Register", { controller: 'profiles' , action: 'new' }, class: "btn btn-success btn-register" %>
           </li>
@@ -71,7 +71,7 @@
             <%= form.submit :Search, { class: "btn btn-primary btn-search" } %>
           </li>
           <li class="nav-item">
-            <a class="btn btn-dark" href>Back</a>
+            <%= link_to "Back", company_url(@company), { class: "btn btn-dark" } %>
           </li>
         </ul>
       </div>
@@ -82,9 +82,9 @@
         <table id="table-company-content" class="table">
           <thead>
             <tr>
-              <th width="15%" class="col-content" scope="col">Code</th>
-              <th width="20%" class="col-content" scope="col">Company name</th>
-              <th width="20%" class="col-content" scope="col">Email</th>
+              <th width="10%" class="col-content" scope="col">Code</th>
+              <th width="15%" class="col-content" scope="col">Company name</th>
+              <th width="15%" class="col-content" scope="col">Email</th>
               <th width="15%" class="col-content" scope="col">Phone number</th>
               <th width="15%" class="col-content" scope="col">Release date</th>
               <th width="15%" class="col-content" scope="col">Status</th>
@@ -109,8 +109,8 @@
                   <td class="col-content"></td>
                 <% end %>
                 <td class="col-content">
-                  <%= link_to 'Detail', profile, class: "btn btn-dark btn-detail mr-2" %>
-                  <%= link_to 'Delete', profile, method: :DELETE, data: { confirm: 'Are you sure?' }, class: "btn btn-dark btn-remove", html: { value: "Delete" } %>
+                  <%= link_to 'Detail', company_profile_path(@company.code, profile.profile_id), class: "btn btn-dark btn-detail mr-2" %>
+                  <%= link_to 'Delete', company_profile_path(@company.code, profile.profile_id), method: :DELETE, data: { confirm: 'Are you sure?' }, class: "btn btn-dark btn-remove", html: { value: "Delete" } %>
                 </td>
               </tr>
             <% end %>

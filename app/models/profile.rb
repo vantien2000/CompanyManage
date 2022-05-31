@@ -9,6 +9,7 @@ class Profile < ApplicationRecord
 
     self.table_name = "profiles"
     self.primary_key = "profile_id"
+    belongs_to :company
 
     validates :code, presence: { message: "Code is required" }, length: {is: 6, message: "Company code must have 6 characters!"}, format: { with: VALID_CODE_REGEX, message: 'Please enter a valid code' },
     uniqueness: { case_sensitive: false, message: "Company code must be unique!" }
@@ -20,6 +21,7 @@ class Profile < ApplicationRecord
     validates :logo, presence: { message: "Logo is required" }
     # validates_size_of :logo, maximum: 1.megabytes, message: "Logo souble be less than 1MB"
 
+    scope :getCodeProfiles, -> { group(:code).pluck(:code) }
     scope :getProfileByDate, -> release_date { where(release_date: release_date) }
     scope :getCodeCompany, -> code { where("code LIKE ?", "%" + code + "%") }
     scope :getCompanyName, -> company_name { where("company_name LIKE ?", "%" + company_name + "%") }
@@ -31,8 +33,8 @@ class Profile < ApplicationRecord
         @codeCompanyProfiles = Profile.group(:code).pluck(:code)
     end
 
-    def Profile.filter_profile profile_params_filter, page, per_page
-        @profiles = Profile.all
+    def Profile.filter_profile profile_params_filter, page, per_page, company_id
+        @profiles = Profile.where(code: company_id)
         if !profile_params_filter.empty?
             if !(profile_params_filter[:code]).empty?
                 @profiles = @profiles.getCodeCompany(profile_params_filter[:code])
@@ -53,6 +55,6 @@ class Profile < ApplicationRecord
                 @profiles = @profiles.getStatusCompany(profile_params_filter[:status])
             end
         end
-        @profiles = @profiles.paginate(page: page, per_page: per_page).order('profiles.profile_id DESC')
+        @profiles = @profiles ?  @profiles.paginate(page: page, per_page: per_page).order('profiles.profile_id DESC') : []
     end
 end

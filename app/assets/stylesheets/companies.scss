@@ -60,14 +60,18 @@ header .dropdown-menu {
 }
 #company-management-frm, 
 #company-register-frm,
-#company-details-frm {
+#company-details-frm,
+#profile-register-frm,
+#profile-details-frm {
     hr {
         border-bottom: 1px solid black;
     }
 }
 #company-management-frm,
 #company-register-frm,
-#company-details-frm {
+#company-details-frm,
+#profile-register-frm,
+#profile-details-frm {
     .form-group {
         margin: 0px;
     }
@@ -78,7 +82,9 @@ header .dropdown-menu {
 }
 #company-management-frm,
 #company-register-frm,
-#company-details-frm {
+#company-details-frm,
+#profile-register-frm,
+#profile-details-frm {
     #table-company-frm td {
         vertical-align: middle;
         border-top: none !important;
@@ -87,7 +93,9 @@ header .dropdown-menu {
 
 #company-management-frm,
 #company-register-frm,
-#company-details-frm {
+#company-details-frm,
+#profile-register-frm,
+#profile-details-frm {
     #table-company-frm td .form-control {
         border: 2px solid #72ACFF;
         height: 50px;
@@ -99,7 +107,7 @@ header .dropdown-menu {
     }
 }
 
-.group-btn a, button, input[type="submit"] {
+.group-btn a, .profile-group-btn a, button, input[type="submit"] {
     width: 120px;
     height: 40px;
     border-radius: 10px !important;
@@ -229,7 +237,8 @@ header .dropdown-menu {
             position: relative;
             opacity: 0;
         }
-        label[for=company_logo].error {
+        label[for=company_logo].error,
+        label[for=profile_logo].error {
             display: block;
             margin-top: 10px;
             text-align: left;

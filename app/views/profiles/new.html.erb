@@ -1,11 +1,11 @@
-<% content_for :title, "Company register" %>
+<% content_for :title, "Profile register" %>
 <% content_for :content do %>
 <div class="wrapper">
   <div class="main-wrapper row">
     <div class="col-lg-12 col-sm-12 title-main">
-      <h4 class="m-0">Company Management</h4>
+      <h4 class="m-0">Profile Management</h4>
     </div>
-    <%= form_for @profile, html: {class: "col-lg-12 col-sm-12 p-0", id: "company-register-frm", method: "POST"} do |f| %>
+    <%= form_for new_company_profile_url(@company), html: { class: "col-lg-12 col-sm-12 p-0", id: "profile-register-frm", method: "POST" } do |f| %>
         <div class="form-wrapper mt-4 p-0 mr-0 d-flex">
             <table id="table-company-frm" class="table col-lg-6 col-sm-6">
                 <tr>
@@ -17,7 +17,7 @@
                     <td width="80%">
                         <div class="row form-group">
                             <div class="col-sm-4">
-                                <%= f.select :code, @companiesSelect, {:code => "select"}, {class: "form-control"} %>
+                                <%= f.select :code, @companiesSelect, {  }, { class: "form-control", id: "code" } %>
                                 <label class="error d-block"><%= @profile.errors.messages_for(:code).empty? ? '' : @profile.errors.messages_for(:code)[0] %></label>
                             </div>
                         </div>
@@ -76,17 +76,17 @@
                     </td>
                 </tr>
                 <tr>
-                  <td><%= f.label :release_date do %>
-                      Release date<span class="text-danger">*</span>
+                    <td><%= f.label :release_date do %> 
+                        Release date<span class="text-danger">*</span>
                     <% end %></td>
-                  <td>
-                    <div class="row form-group">
-                      <div class="col-sm-8">
-                        <%= f.date_field :release_date , { class: "form-control" } %>
-                        <label class="error d-block"><%= @profile.errors.messages_for(:phone_number).empty? ? '' : @profile.errors.messages_for(:phone_number)[0] %></label>
-                      </div>
-                    </div>
-                  </td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.date_field :release_date , { class: "form-control" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:release_date).empty? ? '' : @profile.errors.messages_for(:release_date)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><%= f.label :website do %> 
@@ -125,12 +125,12 @@
             </table>
         </div>
         <div class="col-lg-12 col-sm-12 d-flex justify-content-end align-items-center my-4">
-            <ul class="nav group-btn">
+            <ul class="nav profile-group-btn">
                 <li class="nav-item">
                     <%= f.submit :Register , { class: "btn btn-success btn-register" } %>
                 </li>
                 <li class="nav-item">
-                    <%= link_to "Back", { controller: 'companies' , action: 'index' }, class: "btn btn-dark" %>
+                    <%= link_to "Back", { controller: 'profiles' , action: 'index' }, class: "btn btn-dark" %>
                 </li>
             </ul>
         </div>
