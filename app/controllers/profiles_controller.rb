@@ -11,22 +11,25 @@ class ProfilesController < ApplicationController
   # GET /profiles or /profiles.json
   def index
     per_page = params[:per_page] ? params[:per_page] : 5
-    @profiles = Profile.filter_profile profile_params_filter, params[:page], per_page
-    @codeCompanyProfiles = Company.getCompanyByIds(Profile.codeCompanyProfiles)
+    @profiles = Profile.filter_profile profile_params_filter, params[:page], per_page, params[:company_id]
+    @company = Company.find_by(code: params[:company_id])
+    @codeCompanyProfiles = Profile.getCodeProfiles
     @per_page = per_page
     @params = params[:per_page] ? params : profile_params_filter
   end
 
   # GET /profiles/1 or /profiles/1.json
   def show
+    @company = Company.find_by(code: params[:company_id])
     @profile = Profile.find_by(profile_id: params[:id])
-    @codeCompanyProfiles = Company.getCompanyByIds(Profile.codeCompanyProfiles)
+    @companiesSelect = Company.all.pluck(:code)
   end
 
   # GET /profiles/new
   def new
+    @company = Company.find_by(code: params[:company_id])
     @profile = Profile.new
-    @companiesSelect = Company.all.pluck(:company_name, :code)
+    @companiesSelect = Company.all.pluck(:code)
   end
 
   # GET /profiles/1/edit
@@ -54,6 +57,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def updateStatus
+    status = params[:status].to_i
+    @profile = Profile.find_by(code: params[:code])
+    if @profile.update_attribute(:status, status)
+      flash[:status] = "success"
+      redirect_to @profile
+    end
+  end
+
   # DELETE /profiles/1 or /profiles/1.json
   def destroy
     @profile.destroy
@@ -72,7 +84,7 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:profile_id, :code, :company_name, :email, :phone_number, :status, :release_date)
+      params.require(:profile).permit(:profile_id, :code, :address, :company_name, :email, :phone_number, :website, :logo, :status, :release_date)
     end
 
     def profile_params_filter

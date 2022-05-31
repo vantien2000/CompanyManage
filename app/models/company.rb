@@ -8,9 +8,9 @@ class Company < ApplicationRecord
 
     self.table_name = "companies"
     self.primary_key = "code"
+    has_many :profiles
 
-    validates :code, presence: { message: "Code is required" }, length: { is: 6, message: "Company code must have 6 characters!" }, format: { with: VALID_CODE_REGEX, message: 'Please enter a valid code' },
-    uniqueness: { case_sensitive: false, message: "Company code must be unique!" }
+    validates :code, presence: { message: "Code is required" }, length: { is: 6, message: "Company code must have 6 characters!" }, format: { with: VALID_CODE_REGEX, message: 'Please enter a valid code' }
     validates :company_name, presence: { message: "Company name is required" }, length: {maximum: 256, message: "Company name be at least 256 characters long"}
     validates :address, presence: { message: "Address is required" }, length: {maximum: 256, message: "Address be at least 256 characters long"}
     validates :email, presence: { message: "Email is required" }, length: {maximum: 256, message: "Email be at least 256 characters long"}, format: { with: VALID_EMAIL_REGEX, message: 'Please enter a valid email'}
@@ -18,5 +18,4 @@ class Company < ApplicationRecord
     validates :website, length: {maximum: 256, message: "Website be at least 256 characters long"}
     validates :logo, presence: { message: "Logo is required" }
     # validates_size_of :logo, maximum: 1.megabytes, message: "Logo souble be less than 1MB"
-    scope :getCompanyByIds, -> code { where("code  IN (?)", code).pluck(:company_name, :code) }
 end
