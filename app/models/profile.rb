@@ -57,4 +57,8 @@ class Profile < ApplicationRecord
         end
         @profiles = @profiles ?  @profiles.paginate(page: page, per_page: per_page).order('profiles.profile_id DESC') : []
     end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> 2bf0831eaf70f63b43e5d2091e2e21c7090d8168
