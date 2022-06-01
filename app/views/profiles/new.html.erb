@@ -1,5 +1,140 @@
-<h1>New Profile</h1>
-
-<%= render 'form', profile: @profile %>
-
-<%= link_to 'Back', profiles_path %>
+<% content_for :title, "Profile register" %>
+<% content_for :content do %>
+<div class="wrapper">
+  <div class="main-wrapper row">
+    <div class="col-lg-12 col-sm-12 title-main">
+      <h4 class="m-0">Profile Management</h4>
+    </div>
+    <%= form_for new_company_profile_url(@company), html: { class: "col-lg-12 col-sm-12 p-0", id: "profile-register-frm", method: "POST" } do |f| %>
+        <div class="form-wrapper mt-4 p-0 mr-0 d-flex">
+            <table id="table-company-frm" class="table col-lg-6 col-sm-6">
+                <tr>
+                    <td width="20%">
+                    <%= f.label :code do %> 
+                        Code company<span class="text-danger">*</span>
+                    <% end %>
+                    </td>
+                    <td width="80%">
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <%= f.select :code, @companiesSelect, {  }, { class: "form-control", id: "code" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:code).empty? ? '' : @profile.errors.messages_for(:code)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :company_name do %> 
+                        Company name<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.text_field :company_name , { class: "form-control", placeholder: "Please enter Company name" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:company_name).empty? ? '' : @profile.errors.messages_for(:company_name)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :address do %> 
+                        Address<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <%= f.text_field :address , { class: "form-control", placeholder: "Please enter address" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:address).empty? ? '' : @profile.errors.messages_for(:address)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :email do %> 
+                        Email<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.text_field :email , { class: "form-control", placeholder: "Please enter email" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:email).empty? ? '' : @profile.errors.messages_for(:email)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :phone_number do %> 
+                        Phone number<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.text_field :phone_number , { class: "form-control", placeholder: "Please enter phone number" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:phone_number).empty? ? '' : @profile.errors.messages_for(:phone_number)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :release_date do %> 
+                        Release date<span class="text-danger">*</span>
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.date_field :release_date , { class: "form-control" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:release_date).empty? ? '' : @profile.errors.messages_for(:release_date)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= f.label :website do %> 
+                        Website
+                    <% end %></td>
+                    <td>
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <%= f.text_field :website , { class: "form-control", placeholder: "Please enter website" } %>
+                                <label class="error d-block"><%= @profile.errors.messages_for(:website).empty? ? '' : @profile.errors.messages_for(:website)[0] %></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="col-lg-6 col-sm-6 upload-logo">
+                <tr height="114px">
+                    <td>
+                        <%= f.label :upload do %> 
+                        logo<span class="text-danger">*</span>
+                    <% end %>
+                        <%= image_tag(!@profile.logo? ? 'default.png' : @profile.logo_url, :alt => "default image", class: "d-block logo-img ml-3") %>
+                        <div class="btn btn-upload">
+                             <%= f.label :logo, { class: "logo_img_label" } do %> 
+                            <i class="fa fa-camera" aria-hidden="true"></i>upload
+                            <% end %>
+                            <%= f.file_field :logo %>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="error error_image d-block"><%= @profile.errors.messages_for(:logo).empty? ? '' : @profile.errors.messages_for(:logo)[0] %></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-12 col-sm-12 d-flex justify-content-end align-items-center my-4">
+            <ul class="nav profile-group-btn">
+                <li class="nav-item">
+                    <%= f.submit :Register , { class: "btn btn-success btn-register" } %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Back", { controller: 'profiles' , action: 'index' }, class: "btn btn-dark" %>
+                </li>
+            </ul>
+        </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

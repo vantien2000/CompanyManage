@@ -5,3 +5,4 @@
 */
 import "./login";
 import "./companies/company";
+import "./profiles/profile";

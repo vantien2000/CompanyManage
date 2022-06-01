@@ -20,7 +20,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 #mysql 0.5
-gem 'mysql2', '~> 0.5'
+gem 'mysql2', '~> 0.5.2'
+gem "ransack"
 # Use Active Storage variant
 gem 'carrierwave'
 gem 'mini_magick'
@@ -29,18 +30,17 @@ gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap4'
 gem 'bcrypt-ruby'
 gem 'rails_param'
-gem "puma",  '~> 5.0'
+gem "puma",  '~> 5.0.2'
 gem 'net-smtp' # to send email
 gem 'net-imap' # for rspec
 gem 'net-pop'  # for rspec
-gem 'unicorn'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'mysql2', '~> 0.5'
+  gem 'mysql2', '~> 0.5.2'
 end
 
 group :development do
@@ -64,7 +64,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '1.1.4'
+  gem 'pg', '~> 1.3', '>= 1.3.5'
   gem "rails_12factor", "0.0.2"
 end
 
